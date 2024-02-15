@@ -136,6 +136,7 @@ ErrorStatus_t RCC_PLLPrescallerConfigration(u16 N, u16 M, u16 P){
 	else{
 		u32 Loc_temp = RCC->RCC_PLLCFGR;
 		Loc_temp &= PLL_PRESCALLER_CONFIG_MASK;
+		P = (P/2)-1;
 		Loc_temp  |= (N<<PLLN0)|(M<<PLLM0)|(P<<PLLP0);
 		RCC->RCC_PLLCFGR = Loc_temp;
 		}
