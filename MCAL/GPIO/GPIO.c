@@ -19,6 +19,14 @@
 #define PIN_PUPDR_OFFSET                        0x00000002
 #define PIN_ALTERNATIVE_OFFSET                  0x00000004
 
+#define GPIOA	                                ((volatile GPIO_Registers_t* const)0x40020000)
+#define GPIOB	                                ((volatile GPIO_Registers_t* const)0x40020400)
+#define GPIOC	                                ((volatile GPIO_Registers_t* const)0x40020800)
+/*
+#define GPIOD	                                ((volatile GPIO_Registers_t* const)0x40020C00)
+#define GPIOE	                                ((volatile GPIO_Registers_t* const)0x40021000)
+#define GPIOH	                                ((volatile GPIO_Registers_t* const)0x40021C00)
+*/
 volatile GPIO_Registers_t* const GPIO_Ports[3] =
 {
     (GPIO_Registers_t *)GPIOA,
@@ -34,7 +42,7 @@ ErrorStatus_t GPIO_Init(GPIO_PinConfiguration_t* Add_pstrPinConfg){
 	else if(Add_pstrPinConfg->GPIO_Pin > GPIO_PIN_15){
 		Loc_ErrorStatus = GPIO_WrongPin;
 	}
-	else if(Add_pstrPinConfg->GPIO_Port > (u32)GPIOC){
+	else if(Add_pstrPinConfg->GPIO_Port > GPIO_C){
 		Loc_ErrorStatus = GPIO_WrongPort;
 	}
 	else if(Add_pstrPinConfg->GPIO_ALTF > GPIO_AF15){
@@ -82,12 +90,12 @@ ErrorStatus_t GPIO_Init(GPIO_PinConfiguration_t* Add_pstrPinConfg){
 	return Loc_ErrorStatus;
 }
 
-ErrorStatus_t GPIO_SetPinValue(u32 Copy_GPIOPort, u32 Copy_GPIOPin, u32 Copy_GPIOPinState){
+ErrorStatus_t GPIO_SetPinValue(u8 Copy_GPIOPort, u8 Copy_GPIOPin, u8 Copy_GPIOPinState){
 	ErrorStatus_t Loc_ErrorStatus = GPIO_Ok;
 		if(Copy_GPIOPin > GPIO_PIN_15){
 			Loc_ErrorStatus = GPIO_WrongPin;
 		}
-		else if(Copy_GPIOPort > (u32)GPIOC){
+		else if(Copy_GPIOPort > GPIO_C){
 			Loc_ErrorStatus = GPIO_WrongPort;
 		}
 		else if(Copy_GPIOPinState != GPIO_LOW && Copy_GPIOPinState != GPIO_HIGH){
@@ -99,12 +107,12 @@ ErrorStatus_t GPIO_SetPinValue(u32 Copy_GPIOPort, u32 Copy_GPIOPin, u32 Copy_GPI
 	return Loc_ErrorStatus;
 }
 
-ErrorStatus_t GPIO_GetPinValue(u32 Copy_GPIOPort, u32 Copy_GPIOPin, u32* Add_GPIOPinState){
+ErrorStatus_t GPIO_GetPinValue(u8 Copy_GPIOPort, u8 Copy_GPIOPin, u8* Add_GPIOPinState){
 	ErrorStatus_t Loc_ErrorStatus = GPIO_Ok;
 		if(Copy_GPIOPin > GPIO_PIN_15){
 			Loc_ErrorStatus = GPIO_WrongPin;
 		}
-		else if(Copy_GPIOPort > (u32)GPIOC){
+		else if(Copy_GPIOPort > GPIO_C){
 			Loc_ErrorStatus = GPIO_WrongPort;
 		}
 		else if(Add_GPIOPinState == NULL){
