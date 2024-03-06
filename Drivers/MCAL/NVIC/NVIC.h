@@ -118,12 +118,12 @@ typedef enum
  *                                       functions                                  *
  * **********************************************************************************/
 
-NVIC_ErrorStatus_t NVIC_SetPriority(s8 Copy_InterruptID, u8 Copy_GroupPrioty,  u8 Copy_SubGroupPrioty, u32 Copy_Group);
 NVIC_ErrorStatus_t NVIC_EnableInterrupt(u8 Copy_InterruptID);
 NVIC_ErrorStatus_t NVIC_DisableInterrupt(u8 Copy_InterruptID);
 NVIC_ErrorStatus_t NVIC_SetPendingInterrupt(u8 Copy_InterruptID);
 NVIC_ErrorStatus_t NVIC_ClearPendingInterrupt(u8 Copy_InterruptID);
 NVIC_ErrorStatus_t NVIC_GetStatusInterrupt(u8 Copy_InterruptID);
-NVIC_ErrorStatus_t NVIC_GenerateSWInterrupt(u8 Copy_InterruptID);
+NVIC_ErrorStatus_t NVIC_SetPriority(s8 Copy_InterruptID, u8 Copy_Prioty);
+NVIC_ErrorStatus_t NVIC_SetSubGroupPriority(u8 Copy_SubGroupPriority);
 
 #endif /* NVIC_H_ */

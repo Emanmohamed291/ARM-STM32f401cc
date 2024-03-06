@@ -1,4 +1,4 @@
-/*
+/* 
  * NVIC.c
  *
  * Created: 3/5/2024 3:26:10 PM
@@ -60,6 +60,7 @@ NVIC_ErrorStatus_t NVIC_EnableInterrupt(u8 Copy_InterruptID){
     return ErrorStatusLocVar;
 }
 
+
 NVIC_ErrorStatus_t NVIC_DisableInterrupt(u8 Copy_InterruptID){
     NVIC_ErrorStatus_t ErrorStatusLocVar = NVIC_Ok;
     if(Copy_InterruptID > INT_NUMBER){
@@ -70,6 +71,7 @@ NVIC_ErrorStatus_t NVIC_DisableInterrupt(u8 Copy_InterruptID){
     }
     return ErrorStatusLocVar;
 }
+
 
 NVIC_ErrorStatus_t NVIC_SetPendingInterrupt(u8 Copy_InterruptID){
     NVIC_ErrorStatus_t ErrorStatusLocVar = NVIC_Ok;
