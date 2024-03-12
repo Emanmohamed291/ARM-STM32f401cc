@@ -46,31 +46,52 @@
 #include "RCC.h"
 #include "LED.h"
 #include "SWITCH.h"
+#include "NVIC.h"
+#include "SYSTICK.h"
 // Sample pragmas to cope with warnings. Please note the related line at
 // the end of this function, used to pop the compiler diagnostics status.
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 #pragma GCC diagnostic ignored "-Wmissing-declarations"
 #pragma GCC diagnostic ignored "-Wreturn-type"
-
+u8 c = 1;
+void Callback(){
+  if(c==1){
+  LED_SetStatus(LED_Alarm,LED_OUTPUT_HIGH);
+  c = 0;
+  }
+  else{
+    LED_SetStatus(LED_Alarm,LED_OUTPUT_LOW);
+    c = 1;
+  }
+}
 int main(int argc, char* argv[])
 {
   // At this stage the system clock should have already been configured
   // at high speed.
-  //RCC_EnablePeripheralClock();
+  RCC_EnablePeripheralClock(BusAHB1, GPIO_C);
 	
-  RCC_EnablePeripheralClock(BusAHB1,GPIOC);
-  RCC_EnablePeripheralClock(BusAHB1,GPIOA);
 	LED_Init();
   SWITCH_Init();
   SWITCH_Out_State_t SwitchState;
+  //LED_SetStatus(LED_Alarm,LED_OUTPUT_LOW);
+  STK_Init(SOURCE_AHB);
+  STK_EnableSTKInterrupt();
+  STK_SetTime_mS(500);
+  STK_SetCallback(Callback);
+  STK_Start();
+  
   while (1)
     {
-      SWITCH_ReadValue(SWITCH_Inc,  &SwitchState);
-      if(SwitchState == SWITCH_Out_Low)
-	      LED_SetStatus(LED_Alarm,LED_OUTPUT_HIGH);
-      else
-        LED_SetStatus(LED_Alarm,LED_OUTPUT_LOW);
+      // LED_SetStatus(LED_Alarm,LED_OUTPUT_HIGH);
+      // STK_SetTime_mS(1000);
+      // LED_SetStatus(LED_Alarm,LED_OUTPUT_LOW);
+      // STK_SetTime_mS(1000);
+      // SWITCH_ReadValue(SWITCH_Inc,  &SwitchState);
+      // if(SwitchState == SWITCH_Out_Low)
+	    //   LED_SetStatus(LED_Alarm,LED_OUTPUT_HIGH);
+      // else
+      //   LED_SetStatus(LED_Alarm,LED_OUTPUT_LOW);
     }
 }
 

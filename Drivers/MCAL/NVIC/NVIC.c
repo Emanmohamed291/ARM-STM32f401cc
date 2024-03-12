@@ -1,4 +1,4 @@
-/* 
+/*
  * NVIC.c
  *
  * Created: 3/5/2024 3:26:10 PM
@@ -8,7 +8,7 @@
 typedef struct
 {
     volatile u32 NVIC_ISER[8];
-	volatile u32 Reserved1[24];
+	volatile u32 Reserved[24];
 	volatile u32 NVIC_ICER[8];
 	volatile u32 Reserved1[24];
 	volatile u32 NVIC_ISPR[8];
@@ -60,7 +60,6 @@ NVIC_ErrorStatus_t NVIC_EnableInterrupt(u8 Copy_InterruptID){
     return ErrorStatusLocVar;
 }
 
-
 NVIC_ErrorStatus_t NVIC_DisableInterrupt(u8 Copy_InterruptID){
     NVIC_ErrorStatus_t ErrorStatusLocVar = NVIC_Ok;
     if(Copy_InterruptID > INT_NUMBER){
@@ -71,7 +70,6 @@ NVIC_ErrorStatus_t NVIC_DisableInterrupt(u8 Copy_InterruptID){
     }
     return ErrorStatusLocVar;
 }
-
 
 NVIC_ErrorStatus_t NVIC_SetPendingInterrupt(u8 Copy_InterruptID){
     NVIC_ErrorStatus_t ErrorStatusLocVar = NVIC_Ok;
@@ -120,15 +118,15 @@ NVIC_ErrorStatus_t NVIC_SetPriority(s8 Copy_InterruptID, u8 Copy_Prioty){
     return ErrorStatusLocVar;
 }
 
-NVIC_ErrorStatus_t NVIC_SetSubGroupPriority(u8 Copy_SubGroupPriority){
+NVIC_ErrorStatus_t NVIC_SetSubGroupbits(u32 Copy_SubGroupbits){
     NVIC_ErrorStatus_t ErrorStatusLocVar = NVIC_Ok;
-    if(Copy_SubGroupPriority < SCB_PRI_GROUP_0 || Copy_SubGroupPriority > SCB_PRI_GROUP_7){
+    if(Copy_SubGroupbits < SCB_PRI_GROUP_0 || Copy_SubGroupbits > SCB_PRI_GROUP_7){
         ErrorStatusLocVar = NVIC_WrongGroupPriority; /* supposed not error but till now it's*/
     }
     else{
         u32 Loc_Temp = AIRCR;
         Loc_Temp &= NVICMASKAIRCR;
-        Loc_Temp |= Copy_SubGroupPriority;
+        Loc_Temp |= Copy_SubGroupbits;
         AIRCR = Loc_Temp;
     }  
     return ErrorStatusLocVar;
