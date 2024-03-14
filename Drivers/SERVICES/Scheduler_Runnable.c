@@ -6,20 +6,20 @@
  */ 
 #include "Scheduler_Runnable.h"
 #include "Scheduler.h"
-runnableCBF_t Switch_func;
-runnableCBF_t led_func;
+extern runnableCBF_t SW_Runnable;
+//runnableCBF_t led_func;
 const runnable_t SYSRunnables[_Runnables_Num] =
 {
     [LEDAPP]={
         .name = "led1",
         .delay_ms = 10,
 	    .periodicitymS = 50,
-	    .CBfunc = &led_func
+	   // .CBfunc = &led_func
     },
     [SWICHAPP]={
         .name = "switch1",
         .delay_ms = 10,
 	    .periodicitymS = 20,
-	    .CBfunc = &Switch_func
+	    .CBfunc = &SW_Runnable
     }
 };
