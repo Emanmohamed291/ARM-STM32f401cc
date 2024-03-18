@@ -14,8 +14,11 @@
 
 /* Naming for each LED */
 typedef enum{
-	LED_Alarm,
-	LED_Start,
+	RED,
+	YELLOW,
+	GREEN,
+	LEDAPP1,
+	LEDAPP2,
 	_LED_Num
 }LED_t;
 

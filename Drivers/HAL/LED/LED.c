@@ -17,7 +17,7 @@ LED_ErrorStates_t LED_Init(void){
 	GPIO_PinConfiguration_t led;
 	    led.GPIO_Mode = GPIO_MODE_OUTPUT_PP;
 	    led.GPIO_Speed = GPIO_SPEED_LOW;
-	    led.GPIO_ALTF = GPIO_ALTERNATIVE_SYSTEM;
+	    //led.GPIO_ALTF = GPIO_ALTERNATIVE_SYSTEM;
 		for(i=0; i<_LED_Num; i++){
 			led.GPIO_Port = LED_LedsConfig[i].LED_Port_Number;
 			led.GPIO_Pin  = LED_LedsConfig[i].LED_Pin_Number;

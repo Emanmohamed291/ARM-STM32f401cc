@@ -11,8 +11,10 @@
 
 
 typedef enum{
-    LEDAPP,
-    SWICHAPP,
+    APP1,
+    SWITCH,
+    APP2,
+    TRAFFICAPP,
     _Runnables_Num
 }Runnable_t;
 

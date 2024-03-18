@@ -6,20 +6,36 @@
  */ 
 #include "Scheduler_Runnable.h"
 #include "Scheduler.h"
+
 extern runnableCBF_t SW_Runnable;
-//runnableCBF_t led_func;
+extern runnableCBF_t APP1_Runnable;
+extern runnableCBF_t APP2_Runnable;
+extern runnableCBF_t Traffic_Runnable;
+
 const runnable_t SYSRunnables[_Runnables_Num] =
 {
-    [LEDAPP]={
+    [APP1]={
         .name = "led1",
-        .delay_ms = 10,
-	    .periodicitymS = 50,
-	   // .CBfunc = &led_func
+        .delay_ms = 20,
+	    .periodicitymS = 500,
+	    .CBfunc = &APP1_Runnable
     },
-    [SWICHAPP]={
+    [APP2]={
+        .name = "led2 with switch",
+        .delay_ms = 20,
+	    .periodicitymS = 30,
+	    .CBfunc = &APP2_Runnable
+    },
+    [SWITCH]={
         .name = "switch1",
         .delay_ms = 10,
 	    .periodicitymS = 20,
 	    .CBfunc = &SW_Runnable
+    },
+    [TRAFFICAPP]={
+        .name = "traffic1",
+        .delay_ms = 0,
+	    .periodicitymS = 1000,
+	    .CBfunc = &Traffic_Runnable
     }
 };

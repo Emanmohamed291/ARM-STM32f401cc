@@ -8,7 +8,7 @@
 #include "Scheduler_Runnable.h"
 #include "SYSTICK.h"
 
-#define SCHEDULER_TIME           200
+#define SCHEDULER_TIME           1
 
 static volatile u32 pendingTicks = 0;
 extern const runnable_t SYSRunnables[_Runnables_Num];
@@ -31,9 +31,11 @@ void Sched_TickCBF(void){
     pendingTicks++;
 }
 void Sched_Init(void){
-    STK_Init(SOURCE_AHB);
+    STK_Init(SOURCE_AHB_DIV8);
+    STK_EnableSTKInterrupt();
     STK_SetTime_mS(SCHEDULER_TIME);
     STK_SetCallback(Sched_TickCBF);
+    
 }
 void Sched_Start(void){
     STK_Start();
